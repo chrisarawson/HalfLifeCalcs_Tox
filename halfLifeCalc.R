@@ -43,7 +43,8 @@ halfLifeCalc <- function (y0, tHalf,t, rInt, v0=1.5, rVol=0.5*v0, rConc=y0) {
   }
   
   decayData$yRepPoints <- ryPoints
+  decayData.out <<- decayData
   
-  plot(decayData$xPoints,ryPoints,type="l",xlab="Time (days)",ylab="Concentration",
+  plot(decayData$xPoints,ryPoints,type="l",xlab="Time (days)",ylab="Concentration (micro g/L)",
        ylim=c(0,max(ryPoints)))
 }
