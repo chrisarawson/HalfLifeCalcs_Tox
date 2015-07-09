@@ -12,9 +12,10 @@ halfLifeCalc <- function (y0, tHalf,t, rInt, v0=1.5, rVol=0.5*v0, rConc=y0, lag=
   #Generate x-data
   xPoints <- seq(0,t,length.out=(t*10)+1)
   
-  #fit y-data
+  #fit y-data and calculate average y
   decayData <- data.frame(xPoints)
   decayData$yPoints <- exp((-(log(2)/tHalf)*xPoints)+log(y0))
+  average.y <<- mean(decayData$yPoints)
   
   #plot as a line
   plot(decayData$xPoints,decayData$yPoints,type="l",col="black", ylim=c(0,y0), 
@@ -47,11 +48,9 @@ halfLifeCalc <- function (y0, tHalf,t, rInt, v0=1.5, rVol=0.5*v0, rConc=y0, lag=
   decayData.out <<- decayData
   
   #calculate average concentration during exposure
-  average.y <<- mean(decayData$yPoints)
+  
   average.ry <<- mean(decayData$yRepPoints)
-  
   lagged.decayData <- subset(decayData.out,xPoints >= lag)
-  
   average.ryLag <<-mean(lagged.decayData$yRepPoints)
   
   plot(decayData$xPoints,ryPoints,type="l",xlab="Time (days)",ylab="Concentration (micro g/L)",
