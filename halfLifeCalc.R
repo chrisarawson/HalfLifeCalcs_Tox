@@ -1,4 +1,6 @@
-##the above as a single Function
+##A single Function calculating concentration in dosed water with regular replacement
+##This is for replacement with pre-dosed water.
+
 #y0 = starting concentration (micro g/L)
 #yt = concentration at time t (micro g/L)
 #tHalf = known half-life (days)
@@ -20,7 +22,7 @@ halfLifeCalc <- function (y0, tHalf,t, rInt, v0=1.5, rVol=0.5*v0, rConc=y0, lag=
   #plot as a line
   plot(decayData$xPoints,decayData$yPoints,type="l",col="black", ylim=c(0,y0), 
        xlab="Time (days)",ylab="Concentration (micro g/L)")
-  lines(x=c(0,max(xPoints)),y=c(average.y,average.y),col="red")
+  lines(x=c(0,max(xPoints)),y=c(average.y,average.y),col="red",lty=2)
   
   #Generate sequence of replacement days
   rDays <- seq(0,t,by = rInt)
@@ -55,10 +57,10 @@ halfLifeCalc <- function (y0, tHalf,t, rInt, v0=1.5, rVol=0.5*v0, rConc=y0, lag=
   
   plot(decayData$xPoints,ryPoints,type="l",xlab="Time (days)",ylab="Concentration (micro g/L)",
        ylim=c(0,max(ryPoints)))
-  lines(x=c(0,max(xPoints)),y=c(average.ry,average.ry),col="red")
-  lines(x=c(0,max(xPoints)),y=c(average.ryLag,average.ryLag),col="blue")
-  legend(-5,-8,xpd=TRUE,c("Mean with no lag","Mean with lag"),col=c("red","blue"),
-         lty=c(1,1),bty="n")
+  lines(x=c(0,max(xPoints)),y=c(average.ry,average.ry),col="red",lty=2)
+  lines(x=c(lag,max(xPoints)),y=c(average.ryLag,average.ryLag),col="blue",lty=2)
+  legend("bottomleft",xpd=TRUE,c("Mean with no lag","Mean with lag"),col=c("red","blue"),
+         lty=c(2,2),bty="n")
   
  
 }
